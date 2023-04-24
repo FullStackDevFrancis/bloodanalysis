@@ -1,0 +1,153 @@
+@import url('https://fonts.googleapis.com/css?family=Poppins&display=swap');
+.example-spacer {
+  flex: 1 1 auto;
+}
+.mat-toolbar.mat-primary {
+  padding: 50px;
+  margin: 20px;
+  background-color: white;
+}
+.left-space {
+  margin-left: 25%;
+}
+.right-space {
+  margin-right: 25%;
+}
+
+.startBtn {
+  background-color: red;
+  color: white;
+}
+
+li a {
+  text-decoration: none;
+}
+.toolbar {
+  margin-top: 20px;
+  justify-content: space-between;
+  align-items: center;
+  display: flex;
+  position: relative;
+}
+.relative {
+  position: relative;
+  z-index: 10;
+}
+.menu-options {
+  padding-left: 2rem;
+  padding-right: 2rem;
+
+  max-width: 1280px;
+
+  padding-top: 1.25rem;
+  padding-bottom: 1.25rem;
+
+
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.list-menu-options {
+  align-items: center;
+  display: flex;
+  list-style: none
+}
+.list-i {
+  font-weight: 300;
+  letter-spacing: 0.025em;
+  color: black;
+  margin-left: 2rem;
+  margin-right: 2rem;
+}
+
+@keyframes shake {
+  0% { transform: rotate(0deg); }
+  25% { transform: rotate(1deg); }
+  50% { transform: rotate(0deg); }
+  75% { transform: rotate(-1deg); }
+  100% { transform: rotate(0deg); }
+}
+@keyframes shake2 {
+  0% { transform: translate(0, 0) rotate(0deg); }
+  25% { transform: translate(5px, 5px) rotate(5deg); }
+  50% { transform: translate(0, 0) rotate(0deg); }
+  75% { transform: translate(-5px, 5px) rotate(-5deg); }
+  100% { transform: translate(0, 0) rotate(0deg); }
+}
+
+.container {
+  margin: 50px auto;
+  max-width: 80rem;
+}
+
+
+.menu-button {
+  margin-left: 30px;
+}
+
+@media (max-width: 1150px) {
+  .main-image-container {
+    padding-bottom: 10px;
+  }
+  .image {
+    margin-bottom: 30px;
+  }
+  .options {
+    flex-wrap: wrap;
+    .option-box {
+      margin-left: auto;
+      margin-right: auto;
+      width: 80%;
+    }
+  }
+}
+
+.bold {
+  font-style: normal;
+  font-weight: 600;
+}
+
+.pink {
+  color: #DC0155;
+}
+
+.big {
+  font-size: 30px;
+}
+
+
+.poppins {
+  font-family: Poppins;
+}
+
+.blurred-container {
+  height: 100vh;
+  width: 24%;
+  margin-top: -117px;
+  background-image: linear-gradient(#e7d0d0, rgba(254, 226, 226, 0));
+  align-items: center;
+  text-align: center;
+}
+
+.flex {
+  display: flex;
+}
+
+.icons {
+  margin-top: 36%;
+  font-weight: 600;
+  font-size: 30px;
+  font-family: Poppins;
+
+  .icon-part {
+    margin-bottom: 25px;
+  }
+  .icon {
+    scale: 4;
+    margin-bottom: 23px;
+  }
+}
+
+app-main {
+  min-width: 64%;
+}

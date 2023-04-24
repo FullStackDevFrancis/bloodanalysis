@@ -1,0 +1,44 @@
+@import url('https://fonts.googleapis.com/css?family=Poppins&display=swap');
+
+.main-image-container {
+  margin-top: 4rem;
+  padding-bottom: 27px;
+  margin-left: 14vw;
+  margin-right: 20px;
+  max-width: 72rem;
+  padding-right: 15px;
+  width: 54%;
+}
+
+.aboutComp {
+  font-size: 24px;
+  font-family: Poppins;
+  height: 640px;
+  overflow-y: scroll
+}
+::-webkit-scrollbar {
+  width: 8px!important;
+}
+@media (max-width: 1600px) {
+  .main-image-container {
+    //margin-left: 20% !important;
+    width: 75%;
+  }
+}
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+.bold {
+  font-weight: 900;
+}
