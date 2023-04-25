@@ -15,6 +15,9 @@ import { MainComponent } from './main/main.component';
 import { AboutComponent } from './about/about.component';
 import {MainModule} from "./main/main.module";
 import {AboutModule} from "./about/about.module";
+import {FoundersModule} from "./founders/founders.module";
+import {UploadModule} from "./upload/upload.module";
+import {MatMenuModule} from "@angular/material/menu";
 
 @NgModule({
   declarations: [
@@ -31,7 +34,7 @@ import {AboutModule} from "./about/about.module";
     MatFormFieldModule,
     MatInputModule,
     ReactiveFormsModule,
-    MainModule, AboutModule
+    MainModule, AboutModule, FoundersModule, UploadModule, MatMenuModule
   ],
   providers: [],
   bootstrap: [AppComponent]

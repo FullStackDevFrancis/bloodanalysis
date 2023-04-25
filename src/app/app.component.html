@@ -13,15 +13,33 @@
       <ul class="list-menu-options" *ngIf="!mobile">
         <li><a class="list-i" [ngClass]="{'bold': isMatchingPath('home')}" routerLink="/home">Home</a></li>
         <li><a class="list-i" [ngClass]="{'bold': isMatchingPath('about')}" routerLink="/about">About</a></li>
-        <li><a class="list-i" [ngClass]="{'bold': isMatchingPath('test')}">Privacy policy</a></li>
-        <li><a class="list-i" [ngClass]="{'bold': isMatchingPath('ddd')}">Contact</a></li>
+        <li><a class="list-i" [ngClass]="{'bold': isMatchingPath('test')}" routerLink="/contact">Contact</a></li>
+        <li><a class="list-i" [ngClass]="{'bold': isMatchingPath('ddd')}" routerLink="/upload">Upload</a></li>
       </ul>
       <div style="display: flex; align-items: center">
-
-        <div class="menu-button">
+        <div [matMenuTriggerFor]="menu" class="menu-button">
           <mat-icon>clear_all</mat-icon>
         </div>
       </div>
+      <mat-menu #menu="matMenu">
+        <button routerLink="/home" mat-menu-item>
+          <mat-icon>house</mat-icon>
+          <span>Home</span>
+        </button>
+        <button routerLink="/about" mat-menu-item>
+          <mat-icon>person</mat-icon>
+          <span>About</span>
+        </button>
+        <button routerLink="/contact" mat-menu-item>
+          <mat-icon>phone</mat-icon>
+          <span>Contact</span>
+        </button>
+        <button routerLink="/upload" mat-menu-item>
+          <mat-icon>upload</mat-icon>
+          <span>Upload</span>
+        </button>
+      </mat-menu>
+
     </div>
   </div>
 </div>
