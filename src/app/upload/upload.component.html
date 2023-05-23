@@ -1,1 +1,52 @@
-<p>upload works!</p>
+<div class="main-image-container poppins">
+
+  <div *ngIf="!imageUploaded">
+    <input type="file" class="file-input"
+       [accept]="fileType"
+       (change)="onFileSelected($event)" #fileUpload>
+
+<div class="file-upload">
+
+   {{fileName || "No file uploaded yet."}}
+
+    <button mat-mini-fab color="primary" class="upload-btn"
+      (click)="fileUpload.click()">
+        <mat-icon>attach_file</mat-icon>
+
+    </button>
+
+</div>
+  </div>
+
+  <div *ngIf="imageUploaded" class="bold">
+    <div class="result-container">
+      <div class="space-left subtitle-result">Causes</div>
+      <div *ngFor="let item of diseases">
+          <ng-template [ngTemplateOutlet]="disease"  [ngTemplateOutletContext]="{item:item}"></ng-template>
+      </div>
+
+    </div>
+  </div>
+
+  <div *ngIf="imageUploaded" class="bold">
+    <div class="result-container">
+      <div class="space-left subtitle-result">Next steps</div>
+    </div>
+  </div>
+
+
+
+</div>
+
+
+
+<ng-template #disease let-item="item">
+  <div class="disease">
+      <div class="flex">
+          <div>{{item.name}}</div>
+          <div><mat-icon>keyboard_arrow_right</mat-icon></div>
+      </div>
+      <mat-progress-bar [color]="item.color" mode="determinate" [value]="item.probability"></mat-progress-bar>
+  </div>
+
+</ng-template>
