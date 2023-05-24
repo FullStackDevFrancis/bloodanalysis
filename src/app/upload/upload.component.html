@@ -7,7 +7,11 @@
       <input hidden #fileInput type="file" class="file-input"
              [accept]="fileType"
              (change)="onFileSelected($event)" #fileUpload>
-
+     <br>
+      <br>
+      <div *ngIf="analysisBusy">
+        <mat-spinner></mat-spinner>
+      </div>
 
     </div>
   </div>
@@ -22,10 +26,37 @@
 
     </div>
   </div>
-
-  <div *ngIf="imageUploaded" class="bold">
+  <div *ngIf="imageUploaded" style="margin-top: 10px" class="bold">
     <div class="result-container">
       <div class="space-left subtitle-result">Next steps</div>
+    </div>
+  </div>
+  <div *ngIf="imageUploaded" style="margin-top: 10px" class="bold">
+    <div class="result-container">
+      <div class="space-left subtitle-result">Results</div>
+      <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+        <ng-container matColumnDef="Analyse">
+          <th mat-header-cell *matHeaderCellDef> Name </th>
+          <td mat-cell *matCellDef="let element"> {{element.Analyse}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="Eenheid">
+          <th mat-header-cell *matHeaderCellDef> Unit </th>
+          <td mat-cell *matCellDef="let element"> {{element.Eenheid}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="Referentie">
+          <th mat-header-cell *matHeaderCellDef> Reference </th>
+          <td mat-cell *matCellDef="let element"> {{element.Referentie}} </td>
+        </ng-container>
+        <ng-container matColumnDef="value">
+          <th mat-header-cell *matHeaderCellDef> Value </th>
+          <td mat-cell *matCellDef="let element"> {{element.value}} </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
     </div>
   </div>
 

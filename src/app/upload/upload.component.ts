@@ -8,7 +8,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class UploadComponent implements OnInit {
   imageUploaded = false;
+  analysisBusy = false;
   fileType = 'image/png';
+  dataSource: any;
+
+  displayedColumns: string[] = ['Analyse', 'Eenheid', 'Referentie', 'value'];
+
   fileName = '';
   diseases = [{
     name: 'Addisons Disease',
@@ -42,7 +47,7 @@ export class UploadComponent implements OnInit {
   }
 
   onFileSelected(event: any) {
-   // this.imageUploaded = true;
+    this.analysisBusy = true;
     const file:File = event.target.files[0];
 
     if (file) {
@@ -54,7 +59,11 @@ export class UploadComponent implements OnInit {
         formData.append("file", file);
 
         const upload$ = this.http.post("https://bam-ai.herokuapp.com/scan/image", formData);
-        upload$.subscribe(x => console.log(x))
+        upload$.subscribe(x => {
+          this.dataSource = x;
+          this.imageUploaded = true;
+          this.analysisBusy = false;
+        })
     }
 }
 }
