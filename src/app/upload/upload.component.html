@@ -1,28 +1,23 @@
-<div class="main-image-container poppins">
+<div class="main-image-container full-w poppins">
+  <div *ngIf="!imageUploaded" class="result-container">
+    <div class="space-left subtitle-result">Upload</div>
+    <div >
+      <br>
+      <button type="button" mat-raised-button (click)="fileInput.click()">Choose File</button>
+      <input hidden #fileInput type="file" class="file-input"
+             [accept]="fileType"
+             (change)="onFileSelected($event)" #fileUpload>
 
-  <div *ngIf="!imageUploaded">
-    <input type="file" class="file-input"
-       [accept]="fileType"
-       (change)="onFileSelected($event)" #fileUpload>
 
-<div class="file-upload">
-
-   {{fileName || "No file uploaded yet."}}
-
-    <button mat-mini-fab color="primary" class="upload-btn"
-      (click)="fileUpload.click()">
-        <mat-icon>attach_file</mat-icon>
-
-    </button>
-
-</div>
+    </div>
   </div>
+
 
   <div *ngIf="imageUploaded" class="bold">
     <div class="result-container">
       <div class="space-left subtitle-result">Causes</div>
       <div *ngFor="let item of diseases">
-          <ng-template [ngTemplateOutlet]="disease"  [ngTemplateOutletContext]="{item:item}"></ng-template>
+        <ng-template [ngTemplateOutlet]="disease" [ngTemplateOutletContext]="{item:item}"></ng-template>
       </div>
 
     </div>
@@ -35,18 +30,18 @@
   </div>
 
 
-
 </div>
-
 
 
 <ng-template #disease let-item="item">
   <div class="disease">
-      <div class="flex">
-          <div>{{item.name}}</div>
-          <div><mat-icon>keyboard_arrow_right</mat-icon></div>
+    <div class="flex">
+      <div>{{item.name}}</div>
+      <div>
+        <mat-icon>keyboard_arrow_right</mat-icon>
       </div>
-      <mat-progress-bar [color]="item.color" mode="determinate" [value]="item.probability"></mat-progress-bar>
+    </div>
+    <mat-progress-bar [color]="item.color" mode="determinate" [value]="item.probability"></mat-progress-bar>
   </div>
 
 </ng-template>

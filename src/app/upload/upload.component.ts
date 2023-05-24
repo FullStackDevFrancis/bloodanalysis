@@ -42,7 +42,7 @@ export class UploadComponent implements OnInit {
   }
 
   onFileSelected(event: any) {
-    this.imageUploaded = true;
+   // this.imageUploaded = true;
     const file:File = event.target.files[0];
 
     if (file) {
@@ -51,11 +51,10 @@ export class UploadComponent implements OnInit {
 
         const formData = new FormData();
 
-        formData.append("thumbnail", file);
+        formData.append("file", file);
 
-        const upload$ = this.http.post("/api/thumbnail-upload", formData);
-
-        upload$.subscribe();
+        const upload$ = this.http.post("https://bam-ai.herokuapp.com/scan/image", formData);
+        upload$.subscribe(x => console.log(x))
     }
 }
 }
