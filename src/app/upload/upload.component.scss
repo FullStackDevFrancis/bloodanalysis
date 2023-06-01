@@ -63,6 +63,20 @@
   box-shadow: 5px 10px 5px #dce1e14a;
 }
 
+.drop-container {
+  border: 1px dotted black;
+  border-radius: 10px;
+  min-height: 200px;
+
+  .center-drop {
+
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 200px;
+
+  }
+}
 
 
 @media (max-width: 800px) {

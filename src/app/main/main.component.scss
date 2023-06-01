@@ -2,7 +2,7 @@
 .main-title {
   font-style: normal;
   font-weight: 700;
-  font-size: 64px;
+  font-size: 50px;
   line-height: 80px;
   color: black;
   margin-bottom: 2rem;
@@ -89,6 +89,14 @@
   .main-image-container {
     //margin-left: 20% !important;
     margin-left: 14vw;
+  }
+}
+
+@media (max-width: 1500px) {
+  .main-image-container {
+    //margin-left: 20% !important;
+    padding-top: 2rem;
+    max-width: 65rem;
   }
 }
 

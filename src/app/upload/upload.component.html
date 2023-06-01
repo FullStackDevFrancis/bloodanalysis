@@ -3,10 +3,18 @@
     <div class="space-left subtitle-result">Upload</div>
     <div >
       <br>
+      <div class="drop-container">
+        <div class="center-drop">
+          <mat-icon style="transform: scale(2)">upload</mat-icon>
+        </div>
+
+      </div>
       <button type="button" mat-raised-button (click)="fileInput.click()">Choose File</button>
       <input hidden #fileInput type="file" class="file-input"
              [accept]="fileType"
              (change)="onFileSelected($event)" #fileUpload>
+
+
      <br>
       <br>
       <div *ngIf="analysisBusy">
