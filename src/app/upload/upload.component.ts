@@ -10,7 +10,7 @@ import {Color, ScaleType} from "@swimlane/ngx-charts";
 export class UploadComponent implements OnInit {
   imageUploaded = false;
   analysisBusy = false;
-  fileType = 'image/*';
+  fileType = '*';
   dataSource: any;
   filterValues = []
   currentFilter = '';
