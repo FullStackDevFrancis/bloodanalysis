@@ -7,6 +7,12 @@ import { HttpClientModule } from '@angular/common/http';
 import {MatButtonModule} from "@angular/material/button";
 import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
 import {MatTableModule} from "@angular/material/table";
+import {LineChartModule} from "@swimlane/ngx-charts";
+import {MatRadioModule} from "@angular/material/radio";
+import {MatFormFieldModule} from "@angular/material/form-field";
+import {MatInputModule} from "@angular/material/input";
+import {MatSelectModule} from "@angular/material/select";
+import {FormsModule} from "@angular/forms";
 
 
 
@@ -20,7 +26,11 @@ import {MatTableModule} from "@angular/material/table";
     HttpClientModule,
     MatButtonModule,
     MatProgressSpinnerModule,
-    MatTableModule
+    MatTableModule,
+    LineChartModule,
+    MatRadioModule,
+    MatSelectModule,
+    FormsModule,
   ],
   exports: [UploadComponent]
 })

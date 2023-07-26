@@ -1,10 +1,25 @@
 <div class="main-image-container full-w poppins">
   <div *ngIf="!imageUploaded" class="result-container">
     <div class="space-left subtitle-result">Upload</div>
+
+    <div class="settings">
+      <mat-radio-group [(ngModel)]="compareOrAnalyze" aria-label="Select an option">
+        <mat-radio-button value="1">Compare</mat-radio-button>
+        <mat-radio-button value="2">Predict</mat-radio-button>
+      </mat-radio-group>
+      <br>
+      <mat-form-field  style="margin-top: 15px" appearance="outline">
+        <mat-select [(ngModel)]="hospital">
+        <mat-option [value]="'iris'">IRIS</mat-option>
+      </mat-select>
+      </mat-form-field>
+    </div>
+
+
     <div >
       <br>
       <div class="drop-container">
-        <div class="center-drop">
+        <div class="center-drop" (click)="fileInput.click()">
           <mat-icon style="transform: scale(2)">upload</mat-icon>
         </div>
 
@@ -12,6 +27,7 @@
       <button type="button" mat-raised-button (click)="fileInput.click()">Choose File</button>
       <input hidden #fileInput type="file" class="file-input"
              [accept]="fileType"
+             [multiple]="true"
              (change)="onFileSelected($event)" #fileUpload>
 
 
@@ -24,8 +40,36 @@
     </div>
   </div>
 
+  <div *ngIf="imageUploaded && compareOrAnalyze == '2'" style="margin-top: 10px" class="bold">
+    <div class="result-container">
 
-  <div *ngIf="imageUploaded" class="bold">
+      <mat-form-field style="margin-top: 15px" appearance="outline">
+        <mat-select (selectionChange)="changeComparison()" [(ngModel)]="currentFilter">
+          <mat-option [value]="item" *ngFor="let item of filterValues">{{item}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <div class="space-left subtitle-result">Comparison</div>
+      <ngx-charts-line-chart
+        [view]="[900, 500]"
+        [scheme]="colorScheme"
+        [legend]="true"
+        [showXAxisLabel]="false"
+        [showYAxisLabel]="true"
+        [xAxis]="true"
+        [yAxis]="true"
+        [xAxisLabel]="'File'"
+        [yAxisLabel]="'Value'"
+        [yScaleMin]="minScale"
+        [yScaleMax]="maxScale"
+        [timeline]="true"
+        [results]="comparison"
+      >
+      </ngx-charts-line-chart>
+    </div>
+  </div>
+
+  <div *ngIf="imageUploaded" style="margin-top: 10px" class="bold">
     <div class="result-container">
       <div class="space-left subtitle-result">Causes</div>
       <div *ngFor="let item of diseases">
@@ -34,7 +78,7 @@
 
     </div>
   </div>
-  <div *ngIf="imageUploaded" style="margin-top: 10px" class="bold">
+  <div *ngIf="imageUploaded && compareOrAnalyze == '3'" style="margin-top: 10px" class="bold">
     <div class="result-container">
       <div class="space-left subtitle-result">Next steps</div>
     </div>
