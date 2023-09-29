@@ -17,7 +17,6 @@ export class UploadComponent implements OnInit {
   minScale = 0;
   maxScale = 100;
   compareOrAnalyze = '1';
-  hospital = "";
 
   // COMPARE CHART
   colorScheme: Color = {
@@ -27,8 +26,9 @@ export class UploadComponent implements OnInit {
     domain: ['#f00', '#0f0', '#0ff'],
   };
 
-  displayedColumns: string[] = ['Analyse', 'Eenheid', 'Referentie', 'value'];
+  displayedColumns: string[] = ['Test', 'Unit', 'Value', 'Reference', 'BamTest'];
 
+  resultChanged: any = []
   fileName = '';
   diseases = [{
     name: 'Addisons Disease',
@@ -56,8 +56,7 @@ export class UploadComponent implements OnInit {
       probability: 50
     }]
 
-  dataFromBE: any  = {
-  }
+  dataFromBE = []
 
   comparison: any[] = [];
 
@@ -78,57 +77,57 @@ export class UploadComponent implements OnInit {
 
       const formData = new FormData();
       if (this.compareOrAnalyze === '1') {
-        formData.append("file", (files as any)[0]);
+        formData.append("files", (files as any)[0]);
       } else {
         for (let index in files) {
-          if (typeof (files as any)[index] == 'object'){
+          if (typeof (files as any)[index] == 'object') {
             formData.append("files", (files as any)[index]);
           }
         }
       }
 
-      if (this.compareOrAnalyze === '1') {
-        const upload$ = this.http.post("https://bam-ai.herokuapp.com/scan/image?type=" + this.hospital, formData);
-        upload$.subscribe(x => {
-          this.dataSource = x;
-          this.imageUploaded = true;
-          this.analysisBusy = false;
-        })
-      }
 
-      if (this.compareOrAnalyze === '2') {
-        const upload$ = this.http.post("https://bam-ai.herokuapp.com/compare/files?type="+ this.hospital, formData);
-        upload$.subscribe(x => {
-          this.imageUploaded = true;
-          this.dataFromBE = x
-          this.changeComparison()
-          // this.dataSource = x;
-          this.analysisBusy = false;
+      const upload$ = this.http.post("https://bam-ai.herokuapp.com/scan/image", formData);
+      upload$.subscribe((x: any) => {
+        this.dataSource = x.results;
+        this.dataFromBE = x.results;
+        x.results.forEach((x: any) => {
+          const mutatedObj = x
+          x.lastValue = '[' + x.measurements.map((x: any) => x.value).join(' , ') + ']'
         })
-      }
+        this.changeComparison();
+        this.imageUploaded = true;
+        this.analysisBusy = false;
+      })
     }
   }
 
-  changeComparison() {
-    this.filterValues = Object.keys(this.dataFromBE) as [];
-    const listOfSerie = []
-    const listOfValues = this.dataFromBE[this.currentFilter]
 
-    this.minScale = listOfValues[0]["Normality"].split('-')[0] * 0.8
-    this.maxScale = listOfValues[0]["Normality"].split('-')[1] * 1.3
-    for (const obj in listOfValues) {
-      listOfSerie.push({
-        "name": 'file ' + obj,
-        "value": listOfValues[obj]["Referentie"]
+  changeComparison() {
+    console.log()
+    this.filterValues = this.dataFromBE.map((x: any) => x.test) as [];
+    const listOfSerie: any = []
+    const foundValue: any = this.dataFromBE.find((x: any) => x.test == this.currentFilter)
+    console.log(this.filterValues, foundValue)
+    if (foundValue) {
+      this.minScale = foundValue.reference.split('|')[0] * 0.8
+      this.maxScale = foundValue.reference.split('|')[1] * 1.3
+      foundValue.measurements.forEach((x: any, index: number) => {
+        listOfSerie.push({
+          "name": 'file ' + (index + 1),
+          "value": x.value
+        })
       })
+
+
+      this.comparison = [
+        {
+          "name": this.currentFilter,
+          "series": listOfSerie
+        }
+      ]
     }
-    console.log(listOfSerie)
-    this.comparison = [
-      {
-        "name": this.currentFilter,
-        "series": listOfSerie
-      }
-    ]
+    console.log(this.comparison)
     console.log(this.currentFilter)
   }
 }
